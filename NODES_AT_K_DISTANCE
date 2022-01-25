@@ -1,0 +1,68 @@
+//Given the root of a binary tree, the value of a target node target, and an integer k, return an array of the values of all nodes that have a distance k from the target node.
+
+You can return the answer in any order.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+     vector<TreeNode*> res;
+    bool findnodetoroot(TreeNode* root, TreeNode* target)
+    {
+      if(root==NULL)
+      {
+          return false;
+      }
+        if(root->val==target->val)
+        {
+            res.push_back(root);
+            return true;
+        }
+        bool l= findnodetoroot(root->left,target);
+        if(l==true)
+        {
+            res.push_back(root);
+            return true;
+        }
+        bool r = findnodetoroot(root->right,target);
+        if(r==true)
+        {
+            res.push_back(root);
+            return true;
+        }
+        return false;
+    }
+    void kdownlevel(TreeNode* root, TreeNode* Blocker, int k, vector<int> &ans)
+    {
+        if(root==NULL || k<0 || root==Blocker)
+        {
+            return;
+        }
+        if(k==0)
+        {
+            ans.push_back(root->val);
+            
+        }
+        kdownlevel(root->left,Blocker,k-1,ans);
+        kdownlevel(root->right,Blocker,k-1,ans);
+    }
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+       
+        findnodetoroot(root,target);
+        vector<int> ans;
+        for(int i=0; i<res.size(); i++)
+        {
+             kdownlevel(res[i],i==0?NULL:res[i-1],k-i,ans);
+        }
+        return ans;
+        
+        
+        
+    }
+};// TC O(N) SC O(N)
