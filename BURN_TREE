@@ -84,3 +84,4 @@ int Solution::solve(TreeNode* root, int B) {
     return maxi;
 }
 // https://www.interviewbit.com/old/problems/burn-a-tree/
+// TC O(N(LOGN)) SC O(N)
