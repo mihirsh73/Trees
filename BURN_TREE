@@ -1,0 +1,86 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ int findMaxDistance(map<TreeNode*,TreeNode*> &mpp, TreeNode* target) {
+   queue<TreeNode*> qt;
+   qt.push(target);
+   map<TreeNode*, int> vis;
+   vis[target]=1;
+   int maxi=0;
+   while(qt.empty()==false)
+   {
+       int n = qt.size();
+      int flag=0;
+      for(int i=0; i<n; i++)
+      {
+          TreeNode* t= qt.front();
+          qt.pop();
+          if(t->left!=NULL && vis.find(t->left)==vis.end()) // burn the left
+          {
+              flag=1;
+              qt.push(t->left);
+              vis[t->left]=1;
+          }
+          if(t->right!=NULL && vis.find(t->right)==vis.end()) // burn the right
+          {
+              flag=1;
+              qt.push(t->right);
+              vis[t->right]=1;
+          }
+          if(mpp.find(t)!=mpp.end() && vis.find(mpp[t])==vis.end()) // burn the parent
+          {
+              flag=1;
+              qt.push(mpp[t]);
+              vis[mpp[t]]=1;
+          }
+          
+      }
+      if(flag==1)
+      {
+          maxi++;
+      }
+       
+   }
+   return maxi;
+}
+TreeNode* bfsToMapParents(TreeNode* root, map<TreeNode*, TreeNode*> &mpp, int start) {
+    queue<TreeNode*> qt;
+    TreeNode* ans;
+    qt.push(root);
+    while(qt.empty()==false)
+    {
+        
+        TreeNode* t= qt.front();
+        qt.pop();
+       if(t->val==start)
+       {                                             // this function is for finding node and its parent
+           ans=t;
+       }
+       if(t->left!=NULL)
+       {
+           mpp[t->left]=t;
+           qt.push(t->left);
+       }
+       if(t->right!=NULL)
+       {
+           mpp[t->right]=t;
+           qt.push(t->right);
+       }
+    }
+    return ans;
+    
+    
+}
+int Solution::solve(TreeNode* root, int B) {
+     map<TreeNode*,TreeNode*> mpp; 
+    TreeNode* target = bfsToMapParents(root, mpp, B); 
+    int maxi = findMaxDistance(mpp, target); 
+    return maxi;
+}
+// https://www.interviewbit.com/old/problems/burn-a-tree/
