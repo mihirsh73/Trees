@@ -1,0 +1,88 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    /*vector<TreeNode*> res1;
+    vector<TreeNode*> res2;
+    bool path2(TreeNode* root, TreeNode* q)
+    {
+        if(root==NULL)
+        {
+            return false;
+        }
+        bool l = path2(root->left,q);
+        if(l==true)
+        {
+            res2.push_back(root);
+            return true;
+        }
+        bool r= path2(root->right,q);
+        if(r==true)
+        {
+            res2.push_back(root);
+            return true;
+        }
+        return false;
+    }
+    bool path1(TreeNode* root, TreeNode* p)
+    {
+        if(root==NULL)
+        {
+            return false;
+        }                                         // TC O(2N) SC O(N)
+        bool l = path1(root->left,p);
+        if(l==true)
+        {
+            res1.push_back(root);
+            return true;
+        }
+        bool r= path1(root->right,p);
+        if(r==true)
+        {
+            res1.push_back(root);
+            return true;
+        }
+        return false;
+    }*/
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        /*path1(root,p);
+        path2(root,q);
+        reverse(res1.begin(),res1.end());
+        reverse(res2.begin(),res2.end());
+        for(int i=0; i<res1.size() && res2.size(); i++)
+        {
+            if(res1[i]!=res2[i])
+            {
+                return res1[i-1];
+            }
+        }
+        return NULL;*/
+        if(root==NULL || root==p || root==q)
+        {
+            return root;
+        }                                                                    //TC O(N) SC O(N)
+        TreeNode* l = lowestCommonAncestor(root->left,p,q);
+        TreeNode* r= lowestCommonAncestor(root->right,p,q);
+        if(l==NULL)
+        {
+            return r;
+        }
+        if(r==NULL)
+        {
+            return l;
+        }
+        else{
+            return root;
+        }
+        
+        
+        
+    }
+};
