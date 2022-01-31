@@ -1,0 +1,62 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T val;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T val) {
+            this->val = val;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+int find(TreeNode<int> *root, int x)
+{
+    /*if(root==NULL)
+    {
+        return 0;
+    }
+    if(root->val==x)
+    {
+        va=x;
+    }
+    if(root->val>x)
+    {
+        find(root->left,x,va);
+    }
+    else{
+        va = root->val;
+        find(root->right,x,va);
+    }*/
+    int ans=-1;
+    while(root!=NULL)
+    {
+        if(root->val==x)
+        {
+            ans = root->val;
+            return ans;
+        }
+        if(root->val>x)
+        {
+            root=root->left;
+        }
+        else{
+            ans = root->val;
+            root=root->right;
+        }
+    }
+    return ans;
+}
+int floorInBST(TreeNode<int> * root, int X)
+{
+    
+    return find(root,X);
+   
+}
