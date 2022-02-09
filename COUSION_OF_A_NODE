@@ -1,0 +1,56 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+vector<int> Solution::solve(TreeNode* A, int B) {
+    queue<TreeNode*> qt;
+    vector<int> res;
+    qt.push(A);
+    int flag=false;
+    while(qt.empty()==false)
+    {
+        int n= qt.size();
+        if(flag==true)
+        {
+            for(int i=0; i<n; i++){
+            TreeNode* t= qt.front();
+            qt.pop();
+            res.push_back(t->val);
+            }
+            
+        }
+        else{
+            TreeNode *tt= qt.front();
+            qt.pop();
+            if(t->left!=NULL && t->left->val==B)
+            {
+                flag=true;
+                continue;
+            }
+            if(t->right!=NULL && t->right->val==B)  // JUST FIND OUT THE PARENT NODE WHEFE B IS PRESENT IF PRESENT THRN CONTIUE AND INSERT THE CHILD OF OTHER NODES
+            {
+                flag=true;
+                continue;
+            }
+            if(t->left!=NULL)
+            {
+                qt.push(t->left);
+            }
+            if(t->right!=NULL)
+            {
+                qt.push(t->right);
+            }
+            
+        }
+        
+       
+           
+    }
+    return res;
+}
+// TC O(N) SC O(N)
