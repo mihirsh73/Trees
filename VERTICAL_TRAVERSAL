@@ -1,0 +1,77 @@
+/************************************************************
+
+Following is the Binary Tree node class
+    
+template <typename T = int>
+class TreeNode
+{
+public:
+    T data;
+    TreeNode<T> *left;
+    TreeNode<T> *right;
+
+    TreeNode(T val)
+    {
+        this->data = val;
+        left = NULL;
+        right = NULL;
+    }
+
+    ~TreeNode()
+    {
+        if (left != NULL)
+        {
+            delete left;
+        }
+        if (right != NULL)
+        {
+            delete right;
+        }
+    }
+};
+
+***
+*********************************************************/
+#include <bits/stdc++.h>
+vector<int> verticalOrderTraversal(TreeNode<int> *root)
+{
+  vector<int> res;
+    if(root==NULL)
+    {
+        return res;
+    }
+    unordered_map<int,vector<int>> mp;
+    queue<pair<TreeNode<int>*, int>> qt;
+    int hd=0;
+    int mx=0,mn=0;
+    qt.push({root,hd});
+    while(qt.empty()==false)
+    {
+        pair<TreeNode<int>*, int> t= qt.front();
+        qt.pop();
+        TreeNode<int>* node= t.first;
+        hd=t.second;
+        mp[hd].push_back(node->data);
+        if(node->left!=NULL)
+        {
+            qt.push({node->left,hd-1});
+        }
+        if(node->right!=NULL)
+        {
+            qt.push({node->right,hd+1});
+        }
+        if(mn>hd) mn=hd;
+        else if(hd>mx) mx=hd;
+        
+    }
+    for(int i=mn;i<=mx; i++)
+    {
+        vector<int> t=mp[i];
+        for(int j=0; j<t.size(); j++)
+        {
+            res.push_back(t[j]);
+        }
+    }
+    return res;
+        
+} // TC O(N) SCO(N)
