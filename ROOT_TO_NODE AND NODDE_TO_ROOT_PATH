@@ -1,0 +1,55 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ bool find(TreeNode* A, int B, vector<int> &res)
+ {
+     if(A==NULL) return false;
+     res.push_back(A->val);
+     if(A->val==B)
+     {
+         return true;
+     }
+
+     if((find(A->left,B,res)==true)||(find(A->right,B,res)==true)) return true;
+     res.pop_back();
+     return false;
+ }
+ /*bool find(TreeNode* A, int B, vector<int> &res)
+ {
+     if(A==NULL)
+     {
+         return false ;
+     }
+     if(A->val==B)
+     {
+         res.push_back(B);
+         return true;
+     }
+     bool l = find(A->left,B,res);
+     if(l==true)
+     {
+         res.push_back(A->val);
+         return true;
+     }
+     bool r= find(A->right,B,res);
+     if(r==true)
+     {
+         res.push_back(A->val);
+         return true;
+     }
+     return false;
+     
+ }*/
+vector<int> Solution::solve(TreeNode* A, int B) {
+    vector<int> res;
+   
+    find(A,B,res);
+    /*reverse(res.begin(),res.end());*/
+    return res;
+}
