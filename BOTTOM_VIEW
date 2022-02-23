@@ -1,0 +1,56 @@
+/*************************************************************
+ 
+    Following is the Binary Tree node structure.
+
+    class BinaryTreeNode 
+    {
+    public : 
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+*************************************************************/
+void verticalutil(BinaryTreeNode<int> * root,int hd, map<int,vector<int>> &mp, int level){     
+        if(root==NULL)
+        {
+            return;
+        }
+       
+       
+           if(mp.find(hd)==mp.end())
+           {
+             mp[hd].push_back(level);
+            mp[hd].push_back(root->data);
+           }
+           else{
+               if(mp[hd][0]<=level)
+               {
+                   mp[hd][0]=level;
+                   mp[hd][1]=root->data;
+               }
+           }
+        verticalutil(root->left,hd-1,mp,level+1);
+         verticalutil(root->right,hd+1,mp,level+1);
+        
+    }
+    
+vector<int> bottomView(BinaryTreeNode<int> * root){
+vector<int> res;
+        map<int, vector<int>> mp;
+        verticalutil(root,0,mp,0);
+        for(auto x: mp)
+        {
+            res.push_back(x.second[1]);
+        }
+        return res;
+   
+    
+}
+TC O(NLOG(N)) BECAUSE USE OF MAP SC O(N) 
