@@ -1,56 +1,77 @@
-/*************************************************************
- 
-    Following is the Binary Tree node structure.
+/************************************************************
 
-    class BinaryTreeNode 
-    {
-    public : 
-        T data;
-        BinaryTreeNode<T> *left;
-        BinaryTreeNode<T> *right;
+    Following is the TreeNode class structure:
 
-        BinaryTreeNode(T data) {
-            this -> data = data;
+    template <typename T>
+    class TreeNode {
+       public:
+        T val;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T val) {
+            this->val = val;
             left = NULL;
             right = NULL;
         }
     };
 
-*************************************************************/
-void verticalutil(BinaryTreeNode<int> * root,int hd, map<int,vector<int>> &mp, int level){     
-        if(root==NULL)
+************************************************************/
+#include <bits/stdc++.h>
+void topview(TreeNode<int>* root, map<int,int> &mp, int hd)
+{
+    queue<pair<TreeNode<int>*,int>>qt;
+    qt.push({root,hd});
+    while(qt.empty()==false)
+    {
+        TreeNode<int>* t= qt.front().first;
+        hd = qt.front().second;
+        qt.pop();
+        if(mp.find(hd)==mp.end())
         {
-            return;
+            mp[hd]=t->val;                                           TC O(N LOG(N)) SC(2N)
         }
-       
-       
-           if(mp.find(hd)==mp.end())
-           {
-             mp[hd].push_back(level);
-            mp[hd].push_back(root->data);
-           }
-           else{
-               if(mp[hd][0]<=level)
-               {
-                   mp[hd][0]=level;
-                   mp[hd][1]=root->data;
-               }
-           }
-        verticalutil(root->left,hd-1,mp,level+1);
-         verticalutil(root->right,hd+1,mp,level+1);
-        
+        if(t->left!=NULL)
+        {
+            qt.push({t->left,hd-1});
+        }
+        if(t->right!=NULL)
+        {
+            qt.push({t->right,hd+1});
+        }
+            
     }
-    
-vector<int> bottomView(BinaryTreeNode<int> * root){
-vector<int> res;
-        map<int, vector<int>> mp;
-        verticalutil(root,0,mp,0);
-        for(auto x: mp)
-        {
-            res.push_back(x.second[1]);
-        }
-        return res;
-   
-    
 }
-TC O(N(LOG(N)) BECAUSE OF MAP SC O(N)
+/*void topview(TreeNode<int> *root, map<int,vector<int>> &mp, int hd, int level)
+{
+    if(root==NULL) return;
+       if(mp.find(hd)==mp.end())
+       {
+           mp[hd].push_back(level);
+           mp[hd].push_back(root->val);                       // TC O(N(LOG(N)) SC O(N)
+       }
+    else{
+        if(mp[hd][0]>level)
+        {
+            mp[hd][0]=level;
+            mp[hd][1]=root->val;
+        }
+    }
+    topview(root->left,mp,hd-1,level+1);
+    topview(root->right,mp,hd+1,level+1);
+}*/
+vector<int> getTopView(TreeNode<int> *root) {
+    vector<int> res;
+    if(root==NULL) return res;
+    int hd=0;
+    /*int level=1;
+    map<int,vector<int>> mp;
+     topview(root,mp,hd,level);*/
+    map<int,int> mp;
+    topview(root,mp,hd);
+  for(auto x: mp)
+  {
+      res.push_back(x.second);
+  }
+    return res;
+}
