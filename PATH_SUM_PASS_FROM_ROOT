@@ -1,0 +1,24 @@
+int find(Node* root, int &ans, Node* head)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    int l = find(root->left,ans,head);
+    int r= find(root->right,ans,head);
+    int temp = max(max(l,r)+root->data,root->data);
+    
+    if(root==head)
+    {
+        ans = root->data;
+        ans = max(ans,root->data+l);
+        ans = max(ans, root->data+r);
+        ans= max(ans,root->data+l+r);
+
+       
+    }
+
+    return temp;
+    
+}  TC O(N) SC (H)
