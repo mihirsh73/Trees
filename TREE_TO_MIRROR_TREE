@@ -1,0 +1,16 @@
+ queue<Node*> qt;
+        qt.push(node);
+        while(qt.empty()==false)
+        {
+            Node* curr= qt.front();
+            qt.pop();
+               swap(curr->left,curr->right);
+               if(curr->left!=NULL)
+               {
+                   qt.push(curr->left);
+               }
+               if(curr->right!=NULL)
+               {
+                   qt.push(curr->right);
+               }
+        }
