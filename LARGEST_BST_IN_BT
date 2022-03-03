@@ -1,0 +1,58 @@
+/************************************************************
+
+    Following is the Binary Tree node structure
+    
+    template <typename T>
+    class TreeNode {
+        public :
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+
+        ~TreeNode() {
+            if(left)
+                delete left;
+            if(right)
+                delete right;
+        }
+    };
+
+************************************************************/
+struct s{
+    public:
+    int max_value;
+    int min_value;
+    int size;
+    s(int x,int y, int z)
+    {
+        max_value=x;
+        min_value=y;
+        size=z;
+    }
+};
+s largestBSTh(TreeNode<int>* root) 
+{
+    if(root==NULL)
+    {
+        return s(INT_MIN,INT_MAX,0);
+    }
+    s l=largestBSTh(root->left);
+    s r=largestBSTh(root->right);
+    if(l.max_value<root->data && r.min_value>root->data)
+    {
+        return s(max(root->data,r.max_value),min(root->data,l.min_value),l.size+r.size+1);
+    }
+    return s(INT_MAX,INT_MIN,max(l.size,r.size));
+    
+}
+int largestBST(TreeNode<int>* root){
+    {
+        return  largestBSTh(root).size;
+    }
+}
