@@ -82,7 +82,19 @@ public:
             return root;
         }
         
-        
+        //while(root!=NULL)
+    {
+        if(root->data>P->data && root->data>Q->data)
+        {                                                            TC O(N) SC O(1)
+            root=root->left;
+        }
+        else if(root->data<P->data && root->data<Q->data)
+        {
+            root=root->right;
+        }
+        else{
+        return root;
+        }//
         
     }
 };
