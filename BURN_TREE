@@ -21,9 +21,9 @@
       {
           TreeNode* t= qt.front();
           qt.pop();
-          if(t->left!=NULL && vis.find(t->left)==vis.end()) // burn the left
+          if(t->left!=NULL && vis.find(t->left)==vis.end()) // burn the left   // also checking if already burned or not
           {
-              flag=1;
+              flag=1;              // kisi na ko burn kiya hai na nhi agr kiya tabhi count hoga
               qt.push(t->left);
               vis[t->left]=1;
           }
