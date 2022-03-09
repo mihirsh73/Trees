@@ -1,0 +1,23 @@
+TreeNode* find(TreeNode* root, TreeNode* p)
+{
+if(root==NULL) return NULL;
+TreeNode* successor=NULL;
+while(root!=NULL)
+{
+    if(root->val> p->val)
+    {
+    successor=p;
+    root=root->left;
+    
+    }
+    else{
+    root=root->right;
+
+
+}
+return successor;
+
+
+
+
+}
