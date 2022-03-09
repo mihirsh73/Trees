@@ -23,7 +23,7 @@ private:
     NodeValue largestBSTSubtreeHelper(TreeNode* root) {
         // An empty tree is a BST of size 0.
         if (!root) {
-            return NodeValue(INT_MAX, INT_MIN, 0);
+            return NodeValue(INT_MAX, INT_MIN, 0);                                // if root null alaways a bst so MAX becomes INT_MIN and min =INT_MAX
         }
         
         // Get values from left and right subtree of current tree.
@@ -38,7 +38,7 @@ private:
         }
         
         // Otherwise, return [-inf, inf] so that parent can't be valid BST
-        return NodeValue(INT_MIN, INT_MAX, max(left.maxSize, right.maxSize));
+        return NodeValue(INT_MIN, INT_MAX, max(left.maxSize, right.maxSize));        // max=INT_MAX AND min= INT_MIN;
     }
     public:
     int largestBSTSubtree(TreeNode* root) {
