@@ -1,0 +1,77 @@
+// { Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+
+ // } Driver Code Ends
+class Solution
+{
+    public:
+    //Function to insert heap.
+    priority_queue<int> left;     // N IS ODD SIZE OF LEFT = SIZEOF RIGHT+1;
+    priority_queue<int,vector<int>,greater<int>> right;
+    void insertHeap(int &x)
+    {
+        if(left.empty()==true || left.top()>x)
+        {
+            left.push(x);
+        }
+        else{
+            right.push(x);
+        }
+        balanceHeaps();
+    }
+    
+    //Function to balance heaps.
+    void balanceHeaps()
+    {
+         if(right.size()>left.size())
+        {
+            left.push(right.top());
+            right.pop();
+        }
+        else if(left.size()>right.size()+1)
+        {
+            right.push(left.top());
+            left.pop();
+        }
+        
+    }
+    
+    //Function to return Median.
+    double getMedian()
+    {
+        if(left.size()>right.size()) //elements are odd 
+        {
+            return (double)left.top();
+        }
+        else{
+            return (left.top()+right.top())/2.0;
+        }
+        
+    }
+};
+
+
+// { Driver Code Starts.
+
+int main()
+{
+    int n, x;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    	Solution ob;
+    	cin >> n;
+    	for(int i = 1;i<= n; ++i)
+    	{
+    		cin >> x;
+    		ob.insertHeap(x);
+    	    cout << floor(ob.getMedian()) << endl;
+    	}
+    }
+	return 0;
+}  // }  TC O(N(LOG(N) SC O(N)   
+// BRUTE FORCE WORKS WITH INSERTION SORT TAKES ON(N^2) 
