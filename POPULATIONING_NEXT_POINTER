@@ -1,0 +1,28 @@
+if(root==NULL) return NULL;
+     queue<Node*> q;
+        q.push(root);
+        while(q.empty()==false)
+        {
+            int n = q.size();
+            for(int i=0; i<n; i++)
+            {
+                Node* t= q.front();
+                q.pop();
+               
+                if(i!=n-1){
+                    t->next= q.front();
+                    
+                }
+                if(t->left!=NULL)
+                    {
+                        q.push(t->left);
+                    }
+                    if(t->right!=NULL)
+                    {
+                        q.push(t->right);
+                    }
+            }
+        }
+        return root;
+        }
+        TC O(N) SC O(N)
