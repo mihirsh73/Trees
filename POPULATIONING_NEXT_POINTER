@@ -1,3 +1,4 @@
+Node* connect(Node* root)
 if(root==NULL) return NULL;
      queue<Node*> q;
         q.push(root);
