@@ -10,7 +10,7 @@
  int findMaxDistance(map<TreeNode*,TreeNode*> &mpp, TreeNode* target) {
    queue<TreeNode*> qt;
    qt.push(target);
-   map<TreeNode*, int> vis;
+   map<TreeNode*, int> vis;                     instead of map I can also use unordered_map so TC O(2N) SC (3N)
    vis[target]=1;
    int maxi=0;
    while(qt.empty()==false)
@@ -84,4 +84,4 @@ int Solution::solve(TreeNode* root, int B) {
     return maxi;
 }
 // https://www.interviewbit.com/old/problems/burn-a-tree/
-// TC O(N(LOGN)) SC O(N)
+// 
