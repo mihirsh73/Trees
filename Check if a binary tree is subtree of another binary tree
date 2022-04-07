@@ -1,0 +1,68 @@
+ /*bool identical(Node* T ,Node* S)
+    {
+        if(T==NULL && S==NULL) return true;
+        if(T==NULL || S==NULL) return false;
+        if(T->data!=S->data) return false;
+        return identical(T->left,S->left) && identical(T->right,S->right);
+    }
+    bool issubtree(Node* T,Node*S)
+    {
+        if(T==NULL)                                           
+        {
+           return false;
+        }
+        if(identical(T,S)==true)                          BF check at every point tree is identical or not TC (N*M) SC O(N)
+        {
+            return true;
+        }
+        return issubtree(T->left,S) || issubtree(T->right,S);
+    }*/
+    void preorder(Node* root, int &i, char arr[])
+    {
+        if(root==NULL)
+        {
+            arr[i++]='$';
+            return;
+        }
+        arr[i++]=root->data;
+        preorder(root->left,i,arr);
+        preorder(root->right,i,arr);
+    }
+    void inorder(Node* root, int &i, char arr[])                                // find preorder and inorder of both the tree in char array and check subtring present or not
+    {
+        if(root==NULL)
+        {                                                         // TC O(N) SC O(N)
+            arr[i++]='$';
+            return;
+        }
+        inorder(root->left,i,arr);
+        arr[i++]=root->data;
+        inorder(root->right,i,arr);
+    }
+
+    bool subtree(Node* T, Node* S)
+    {
+        char inT[100000],inS[1000000];
+        int m=0,n=0;
+        inorder(T,m,inT);
+        inorder(S,n,inS);
+        inT[m]='\0',
+        inS[n]='\0';
+        if(strstr(inT,inS)==NULL) return false;
+        char preT[100000],preS[100000];
+        m=0,n=0;
+        preorder(T,m,preT);
+        preorder(S,n,preS);
+        preT[m]='\0';
+        preS[n]='\0';
+        if(strstr(preS,preT)==NULL) return false;
+        return true;
+        
+    }
+    bool isSubTree(Node* T, Node* S) 
+    {
+        if(T==NULL) return false;
+        if(S==NULL) return true;
+        return subtree(T,S);
+        
+    }
