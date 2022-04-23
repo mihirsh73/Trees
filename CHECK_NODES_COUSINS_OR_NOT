@@ -1,0 +1,51 @@
+// BR - FIRST FIND LEVEL OF BOTH THE A AND B IF SAME THEN CHCEK FOR THE PARENT NODE TC O(3N) 
+bool isCousins(Node *root, int a, int b)
+{
+   queue<Node*> qt;
+   if(root->data==a || root->data==b) return false;
+   qt.push(root);
+   bool flag=false;
+   while(qt.empty()==false)
+   {
+       if(flag==false)
+       {
+           int n = qt.size();
+           for(int i=0; i<n; i++)
+           {
+               Node* t= qt.front();
+               qt.pop();
+               if(t->left!=NULL && t->left->data==b)  // FIND OUT PARENT OF ANY NODE AND CONTINUE(NO ADD ITS CHILD IN QUEUE) AND ADD CHILD OF OTHER NODE AT SAME LEVEL
+               {
+                   flag=true;
+                   continue;
+               }
+               if(t->right!=NULL && t->right->data==b)
+               {
+                   flag=true;
+                   continue;
+               }
+               if(t->left!=NULL)
+               {
+                   qt.push(t->left);
+               }
+               if(t->right!=NULL)
+               {
+                   qt.push(t->right);
+               }
+           }
+       }
+       else{
+           int n = qt.size();
+           for(int i=0; i<n; i++)
+           {
+               Node* t= qt.front();
+               qt.pop();
+               if(t->data==a)
+               {
+                   return true;
+               }
+           }
+           return false;
+       }
+   }
+   TC O(N) SC O(N)
