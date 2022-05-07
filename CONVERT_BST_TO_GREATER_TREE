@@ -1,3 +1,9 @@
+BRUTE FORCE 1. Traverse node by node(Inorder, preorder, etc.) 
+2. For each node find all the nodes greater than that of the current node, sum the values. Store all these sums. 
+3. Replace each node value with their corresponding sum by traversing in the same order as in Step 1. 
+This takes O(n^2) Time Complexity.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                         OPTIMAL solution
 class Solution {
 public:
    int sum=0;
