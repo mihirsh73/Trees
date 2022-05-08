@@ -1,0 +1,46 @@
+ int find(Node* root, int &sum)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    if(root->left==NULL && root->right==NULL)
+    {
+        return root->data;
+    }
+    
+    int l= find(root->left,sum);
+    int r= find(root->right,sum);
+      int temp=max(l,r)+root->data;
+    
+  if(root->left!=NULL && root->right!=NULL){
+    sum = max(l+r+root->data,sum);
+     return temp;
+   
+  }
+  if(root->left==NULL && root->right!=NULL)
+    {
+        return root->data+r;
+    }
+    else if(root->left!=NULL && root->right==NULL)
+    {
+        return root->data+l;
+    }
+ 
+    
+  
+}
+    int maxPathSum(Node* root)
+    {
+        // code here
+        int sum=INT_MIN;
+        
+        int val=find(root,sum);
+        if(root->left==NULL || root->right==NULL)
+        {
+            sum = max(val,sum);
+        }
+        return sum;
+       
+    }
+    TC O(N) SC O(N)
