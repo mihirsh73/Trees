@@ -58,3 +58,4 @@ public:
  * int param_1 = obj->next();
  * bool param_2 = obj->hasNext();
  */    TC O(1) BECAUSE O(N) FOR PUSHING INTO STACK BUT IF WE CALL N NEXT CALL THEN O(N/N)=O(1) SC = O(H)
+and O(H) TIME COMPLEXITY FOR ONE CALL
