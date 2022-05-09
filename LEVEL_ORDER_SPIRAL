@@ -1,0 +1,33 @@
+    vector<int> ans;
+    if(root==NULL) return ans;
+    queue<Node*> qt;
+    bool leftright=false;
+    qt.push(root);
+    while(qt.empty()==false)
+    {
+        int size = qt.size();
+        vector<int> temp(size);
+        for(int i=0; i<size; i++)
+        {
+            Node* t= qt.front();
+            qt.pop();
+            int index= (leftright)?i:(size-i-1);
+            temp[index]=t->data;                         TC O(N) SC O(N)
+            if(t->left!=NULL)
+            {
+                qt.push(t->left);
+            }
+            if(t->right!=NULL)
+            {
+                qt.push(t->right);
+            }
+            
+        }
+        leftright= !leftright;
+        for(int i=0; i<size; i++)
+        {
+            ans.push_back(temp[i]);
+        }
+    }
+    return ans;
+    }
