@@ -1,56 +1,8 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:
-    /*vector<TreeNode*> res1;
-    vector<TreeNode*> res2;
-    bool path2(TreeNode* root, TreeNode* q)
-    {
-        if(root==NULL)
-        {
-            return false;
-        }
-        bool l = path2(root->left,q);
-        if(l==true)
-        {
-            res2.push_back(root);
-            return true;
-        }
-        bool r= path2(root->right,q);
-        if(r==true)
-        {
-            res2.push_back(root);
-            return true;
-        }
-        return false;
-    }
-    bool path1(TreeNode* root, TreeNode* p)
-    {
-        if(root==NULL)
-        {
-            return false;
-        }                                         // TC O(2N) SC O(N)
-        bool l = path1(root->left,p);
-        if(l==true)
-        {
-            res1.push_back(root);
-            return true;
-        }
-        bool r= path1(root->right,p);
-        if(r==true)
-        {
-            res1.push_back(root);
-            return true;
-        }
-        return false;
-    }*/
+BRUTE FORCE APPROACH - Root to node path for the P and then Q then find traverse the array till find the mismatch and return the element just before the mismatch
+TC O(3N)
+SC O(3N)
+
+
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         /*path1(root,p);
         path2(root,q);
@@ -82,19 +34,6 @@ public:
             return root;
         }
         
-        //while(root!=NULL)
-    {
-        if(root->data>P->data && root->data>Q->data)
-        {                                                            TC O(N) SC O(1)
-            root=root->left;
-        }
-        else if(root->data<P->data && root->data<Q->data)
-        {
-            root=root->right;
-        }
-        else{
-        return root;
-        }//
         
     }
 };
