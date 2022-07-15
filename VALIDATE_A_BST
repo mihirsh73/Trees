@@ -12,5 +12,5 @@ public:
     bool isValidBST(TreeNode* root) {
         return find(root,LONG_MIN,LONG_MAX);
         
-    }
+    }  // TC O(N) SC O(H)   
 };
