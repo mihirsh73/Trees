@@ -1,0 +1,22 @@
+void find(Node* root, int K, int &count, unordered_map<int,int > &mp, int sum)
+  {
+      if(root==NULL)
+      {
+          return;
+      }
+      sum += root->data;
+      if(sum==K) count++;
+      count += mp[sum-K];
+      mp[sum]++;
+      find(root->left,K,count,mp,sum);
+      find(root->right,K,count,mp,sum);
+      mp[sum]--;
+  }
+    int sumK(Node *root,int K)
+    {
+        unordered_map<int,int> mp;
+        int sum=0;
+        int count=0;
+        find(root,K,count,mp,sum);
+        return count;
+    }
