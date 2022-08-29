@@ -1,0 +1,23 @@
+ void find(Node* root,unordered_map<int,int> &mp, int &ans, int target)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        if(mp.find(target-root->data)!=mp.end())
+        {
+            ans=1;
+            return;
+        }
+       mp[root->data]++;
+        find(root->left,mp,ans,target);
+        find(root->right,mp,ans,target);                           // TC O(N) SC O(N)
+    }
+    int isPairPresent(struct Node *root, int target)
+    {
+      unordered_map<int,int> mp;
+      int ans=0;
+       find(root,mp,ans,target);
+       
+      return ans;
+    }
